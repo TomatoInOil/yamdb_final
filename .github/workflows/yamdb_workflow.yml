@@ -45,6 +45,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           file: ./api_yamdb/Dockerfile
+          context: ./api_yamdb
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
 
