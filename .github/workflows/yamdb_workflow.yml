@@ -92,7 +92,7 @@ jobs:
       run: |
         docker context create ${{ secrets.CONTEXT_NAME }} --docker "host=ssh://${{ secrets.USER }}@$${{ secrets.HOST }}"
         docker context use ${{ secrets.CONTEXT_NAME }}
-        docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
+        docker --context ${{ secrets.CONTEXT_NAME }} pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
         cd infra/
