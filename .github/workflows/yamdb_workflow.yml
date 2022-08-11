@@ -67,6 +67,7 @@ jobs:
             export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
             export DB_HOST=${{ secrets.DB_HOST }}
             export DB_PORT=${{ secrets.DB_PORT }}
+            export HOST=${{ secrets.HOST }}
 
   deploy:
     runs-on: ubuntu-20.04
