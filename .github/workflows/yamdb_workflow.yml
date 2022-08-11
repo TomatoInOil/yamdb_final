@@ -95,9 +95,9 @@ jobs:
     - name: Create and run containers
       run: |
         docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
+        cd infra/
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
-        cd infra/
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
 
   send_message:
