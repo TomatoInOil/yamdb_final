@@ -67,7 +67,7 @@ jobs:
             export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
             export DB_HOST=${{ secrets.DB_HOST }}
             export DB_PORT=${{ secrets.DB_PORT }}
-            touch .env
+
   deploy:
     runs-on: ubuntu-20.04
     needs: set_env
@@ -96,6 +96,7 @@ jobs:
       run: |
         docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
         cd infra/
+        touch .env
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
