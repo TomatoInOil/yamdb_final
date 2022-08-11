@@ -85,11 +85,14 @@ jobs:
         ssh-host: ${{ secrets.HOST }}
     - name: Install Docker
       run: |
+        sudo apt-get remove docker docker-engine docker.io containerd runc
         curl -fsSL https://get.docker.com -o get-docker.sh
         sudo sh get-docker.sh
         sudo pip install docker-compose
-    - name: asd
+    - name: Create a Docker context. Create and run containers
       run: |
+        docker context create ${{ secrets.CONTEXT_NAME }} --docker "host=ssh://${{ secrets.USER }}@$${{ secrets.HOST }}"
+        docker context use ${{ secrets.CONTEXT_NAME }}
         docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
