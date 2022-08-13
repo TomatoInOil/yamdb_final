@@ -49,30 +49,9 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
 
-  set_env:
-    runs-on: ubuntu-20.04
-    needs: build_and_push_to_docker_hub
-    steps:
-      - name: Executing remote ssh commands to set env
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            export SECRET_KEY=${{ secrets.SECRET_KEY }}
-            export DB_ENGINE=${{ secrets.DB_ENGINE }}
-            export DB_NAME=${{ secrets.DB_NAME }}
-            export POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-            export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-            export DB_HOST=${{ secrets.DB_HOST }}
-            export DB_PORT=${{ secrets.DB_PORT }}
-            export HOST=${{ secrets.HOST }}
-            printenv
-
   deploy:
     runs-on: ubuntu-20.04
-    needs: set_env
+    needs: build_and_push_to_docker_hub
     steps:
     - name: Check out the repository
       uses: actions/checkout@v3
@@ -94,14 +73,22 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Create env file
+      run: |
+        cd infra/
+        echo SECRET_KEY=${{ secrets.SECRET_KEY }} > .env
+        echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
+        echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+        echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+        echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+        echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+        echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+        echo HOST=${{ secrets.HOST }} >> .env
     - name: Create and run containers
       run: |
         docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
-        cd infra/
-        touch .env
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
-        printenv
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
 
   send_message:
