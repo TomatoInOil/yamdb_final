@@ -86,6 +86,7 @@ jobs:
         echo HOST=${{ secrets.HOST }} >> .env
     - name: Create and run containers
       run: |
+        cd infra/
         docker pull ${{ secrets.DOCKER_USERNAME }}/api_yamdb:latest
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
