@@ -18,8 +18,8 @@ services:
     env_file:
       - ./.env
   nginx:
-    dockerfile: Dockerfile.nginx
-    container_name: nginx_yamdb
+    build:
+      dockerfile: Dockerfile.nginx
     ports:
       - "80:80"
     volumes:
