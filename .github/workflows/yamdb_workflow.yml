@@ -68,6 +68,7 @@ jobs:
             export DB_HOST=${{ secrets.DB_HOST }}
             export DB_PORT=${{ secrets.DB_PORT }}
             export HOST=${{ secrets.HOST }}
+            printenv
 
   deploy:
     runs-on: ubuntu-20.04
@@ -100,6 +101,7 @@ jobs:
         touch .env
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
+        printenv
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
 
   send_message:
