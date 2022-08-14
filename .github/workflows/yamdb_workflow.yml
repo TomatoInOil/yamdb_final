@@ -59,6 +59,8 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.7
+    - name: Upgrade docker-compose
+      run: python -m pip install docker-compose -U
     - name: Prepare to connect the docker to the server
       uses: kielabokkie/ssh-key-and-known-hosts-action@v1.3.0
       with:
