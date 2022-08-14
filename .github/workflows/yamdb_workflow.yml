@@ -30,7 +30,7 @@ jobs:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-20.04
     needs: test
-  
+
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
@@ -64,7 +64,7 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_KEY }}
         ssh-host: ${{ secrets.HOST }}
-    - name: Create a Docker context
+    - name: Create and use a Docker context
       run: |
         docker context create ${{ secrets.CONTEXT_NAME }} --docker "host=ssh://${{ secrets.USER }}@${{ secrets.HOST }}"
         docker context use ${{ secrets.CONTEXT_NAME }}
@@ -91,6 +91,7 @@ jobs:
         docker-compose --context ${{ secrets.CONTEXT_NAME }} down
         docker volume rm ${{ secrets.STATIC_VALUE }}
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
+        docker image prune --force
 
   send_message:
     runs-on: ubuntu-20.04
