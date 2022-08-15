@@ -1,6 +1,6 @@
 name: Yamdb workflow
 
-on:  push:  branches: - master
+on:  push:  branches:  - master
 
 jobs:
   test:
@@ -93,6 +93,7 @@ jobs:
         docker volume rm ${{ secrets.STATIC_VALUE }}
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
         docker image prune --force
+
   send_message:
     runs-on: ubuntu-20.04
     needs: deploy
@@ -102,4 +103,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.workflow }} успешно выполнен!
+        message: ${{ github.workflow }} успешно выполнен! the docker to the server
