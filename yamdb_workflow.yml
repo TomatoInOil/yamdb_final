@@ -1,8 +1,6 @@
 name: Yamdb workflow
 
-on:
-  push:
-    branches: [ "master" ]
+on:  push:  branches: - master
 
 jobs:
   test:
@@ -25,7 +23,7 @@ jobs:
           python -m flake8
           cd api_yamdb/
           python manage.py test
-
+ 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-20.04
@@ -94,7 +92,6 @@ jobs:
         docker volume rm ${{ secrets.STATIC_VALUE }}
         docker-compose --context ${{ secrets.CONTEXT_NAME }} up -d --force-recreate
         docker image prune --force
-
   send_message:
     runs-on: ubuntu-20.04
     needs: deploy
