@@ -150,3 +150,6 @@ static/
 posts/static/
 media/
 
+# скрипт, удаляющий в workflow.yml файле символы \n для прохождения тестов
+# на платформе
+script_yamdb_workflow.py
