@@ -3,6 +3,9 @@
 ## Оглавление
 1. [Описание проекта](https://github.com/TomatoInOil/api_yamdb#описание-проекта)
 2. [Как развернуть](https://github.com/TomatoInOil/api_yamdb#как-развернуть)
+    1. [Запуск с помощью сервера разработки](https://github.com/TomatoInOil/api_yamdb#запуск-с-помощью-сервера-разработки)
+    2. [Запуск проекта через докер](https://github.com/TomatoInOil/api_yamdb#запуск-проекта-через-докер)
+    3. [Уже развёрнутый проект](https://github.com/TomatoInOil/api_yamdb#уже-развёрнутый-проект)
 3. [Работа с API](https://github.com/TomatoInOil/api_yamdb#работа-с-api)
     1. [Доступные запросы](https://github.com/TomatoInOil/api_yamdb#доступные-запросы)
     2. [Аутентификация](https://github.com/TomatoInOil/api_yamdb#аутентификация) 
@@ -17,39 +20,69 @@
   
 В проекте реализован _**API**_-**сервис** для аутентификации пользователей и работы со всеми вышеперечисленными ресурсами. Подробнее в разделе [примеров запросов и ответов](https://github.com/TomatoInOil/api_yamdb#примеры-запросов-и-ответов). Аутентификация пользователей реализована по стандарту _**JWT**_.  
 ## Как развернуть
-```
+### Запуск с помощью сервера разработки
+```BASH
 git clone https://github.com/TomatoInOil/api_yamdb.git
 ```
-```
-cd api_yamdb
+```BASH
+cd api_yamdb/
 ```
 Cоздать и активировать виртуальное окружение:
-```
+```BASH
 python3 -m venv env
 ```
-```
+```BASH
 source env/bin/activate
 ```
 Обновить менеджер пакетов
-```
+```BASH
 python3 -m pip install --upgrade pip
 ```
 Установить зависимости из файла `requirements.txt`:
-```
+```BASH
 pip install -r requirements.txt
 ```
 Перейти в директорию с `manage.py`:
-```
-cd api_yamdb
+```BASH
+cd api_yamdb/
 ```
 Выполнить миграции:
-```
+```BASH
 python3 manage.py migrate
 ```
 Запустить проект:
-```
+```BASH
 python3 manage.py runserver
 ```
+ДОП. Наполнить БД тестовыми данными
+```
+python3 manage.py csvtodb
+```
+### Запуск проекта через докер
+Перейти в директорию с файлом docker-compose
+```BASH
+cd infra/
+```
+Создать и заполнить `.env` в соотвествии с шаблоном `example.env` в директории `infra/`  
+  
+Запустить docker-compose
+```BASH
+docker-compose up -d
+```
+Выполнить миграции
+```BASH
+docker-compose exec web python manage.py migrate --noinput
+```
+Собрать статику 
+```BASH
+docker-compose exec web python manage.py collectstatic
+```
+ДОП. Наполнить БД тестовыми данными
+```
+docker-compose exec web python manage.py csvtodb
+```
+### Уже развёрнутый проект
+Развёрнутый проект доступен по адресу http://158.160.4.15/, а на эндпоинте http://158.160.4.15/api/v1/redoc/ можно найти документацию к API.
 ## Работа с API
 ### Доступные запросы
 | Запрос | Эндпоинт | Метод |
