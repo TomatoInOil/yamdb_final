@@ -1,16 +1,16 @@
 # API YAMDB
 ![Yamdb workflow](https://github.com/tomatoinoil/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 ## Оглавление
-1. [Описание проекта](https://github.com/TomatoInOil/api_yamdb#описание-проекта)
-2. [Как развернуть](https://github.com/TomatoInOil/api_yamdb#как-развернуть)
-    1. [Запуск с помощью сервера разработки](https://github.com/TomatoInOil/api_yamdb#запуск-с-помощью-сервера-разработки)
-    2. [Запуск проекта через докер](https://github.com/TomatoInOil/api_yamdb#запуск-проекта-через-докер)
-    3. [Уже развёрнутый проект](https://github.com/TomatoInOil/api_yamdb#уже-развёрнутый-проект)
-3. [Работа с API](https://github.com/TomatoInOil/api_yamdb#работа-с-api)
-    1. [Доступные запросы](https://github.com/TomatoInOil/api_yamdb#доступные-запросы)
-    2. [Аутентификация](https://github.com/TomatoInOil/api_yamdb#аутентификация) 
-    3. [Примеры запросов и ответов](https://github.com/TomatoInOil/api_yamdb#примеры-запросов-и-ответов) 
-4. [Об авторах](https://github.com/TomatoInOil/api_yamdb#об-авторах)
+1. [Описание проекта](https://github.com/TomatoInOil/yamdb_final#описание-проекта)
+2. [Как развернуть](https://github.com/TomatoInOil/yamdb_final#как-развернуть)
+    1. [Запуск с помощью сервера разработки](https://github.com/TomatoInOil/yamdb_final#запуск-с-помощью-сервера-разработки)
+    2. [Запуск проекта через докер](https://github.com/TomatoInOil/yamdb_final#запуск-проекта-через-докер)
+    3. [Уже развёрнутый проект](https://github.com/TomatoInOil/yamdb_final#уже-развёрнутый-проект)
+3. [Работа с API](https://github.com/TomatoInOil/yamdb_final#работа-с-api)
+    1. [Доступные запросы](https://github.com/TomatoInOil/yamdb_final#доступные-запросы)
+    2. [Аутентификация](https://github.com/TomatoInOil/yamdb_final#аутентификация) 
+    3. [Примеры запросов и ответов](https://github.com/TomatoInOil/yamdb_final#примеры-запросов-и-ответов) 
+4. [Об авторах](https://github.com/TomatoInOil/yamdb_final#об-авторах)
 ## Описание проекта
 Проект _**YaMDb**_ собирает **отзывы** пользователей на **произведения**. Сами произведения в _**YaMDb**_ не хранятся, здесь нельзя посмотреть фильм или послушать музыку.  
   
